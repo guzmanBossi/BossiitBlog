@@ -1,4 +1,6 @@
 
+using BossiIt.BlogServer.Domain.Repositories;
+using BossiIt.BlogServer.Domain.Repositories.Implementation;
 using MongoDB.Driver;
 
 namespace BossiIt.BlogServer
@@ -20,6 +22,9 @@ namespace BossiIt.BlogServer
             builder.Services.AddSingleton<IMongoClient>(s => 
                 new MongoClient(builder.Configuration["BlogDb:ConnectionString"])
             );
+
+            builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+
 
 
             var app = builder.Build();

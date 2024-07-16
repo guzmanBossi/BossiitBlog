@@ -1,9 +1,10 @@
 ﻿using BossiIt.BlogServer.Domain.Models;
 using MongoDB.Driver;
 
-namespace BossiIt.BlogServer.Domain.Repositories
+namespace BossiIt.BlogServer.Domain.Repositories.Implementation
 {
-    public class BlogPostRepository
+    public class BlogPostRepository : IBlogPostRepository
+
     {
         private readonly IMongoCollection<BlogPost> _collection;
 
@@ -23,7 +24,7 @@ namespace BossiIt.BlogServer.Domain.Repositories
         {
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
-        
+
         public async Task UpdateAsync(string id, BlogPost updatedBlogPost)
         {
             await _collection.ReplaceOneAsync(x => x.Id == id, updatedBlogPost);
